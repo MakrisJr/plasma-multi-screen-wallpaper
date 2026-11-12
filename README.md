@@ -96,11 +96,13 @@ Remove it from **Get New Plugins…**, or run:
 | `package/` | The plugin itself (a Plasma/Wallpaper KPackage) |
 | `package/contents/ui/main.qml` | Wallpaper entry point. Works out this monitor's position in the combined area. |
 | `package/contents/ui/SpannedView.qml` | Draws this monitor's slice of the image |
-| `package/contents/ui/config.qml` | Settings page with the preview |
+| `package/contents/ui/config.qml` | Settings page |
+| `package/contents/ui/LayoutPreview.qml` | The settings page's preview of the image over the monitor layout |
 | `package/contents/ui/span.js` | Shared helpers: combined area, the all-screens switch, desktop scripting |
 | `install.sh` / `uninstall.sh` | Install into `~/.local/share/plasma/wallpapers` |
 | `package.sh` | Builds `dist/spanned-image-<version>.tar.gz` for the KDE Store |
 | `test/harness.qml` | Renders `SpannedView` offscreen for a fake monitor layout |
+| `test/render-preview.qml` | Renders `LayoutPreview` offscreen, used for the store logo |
 
 After changing the code, run `./install.sh` again and restart plasmashell:
 
@@ -116,6 +118,13 @@ QT_QPA_PLATFORM=offscreen qml6 test/harness.qml -- image.png out.png 2 \
 ```
 
 The third argument is the fill mode: 2 = fill, 1 = fit, 0 = stretch.
+
+To regenerate the store logo (`assets/logo.png`, 1000×1000):
+
+```bash
+QT_QPA_PLATFORM=offscreen QT_SCALE_FACTOR=2 qml6 test/render-preview.qml -- image.png assets/logo.png \
+  '[{"name":"DP-3","virtualX":0,"virtualY":462,"width":1920,"height":1080},{"name":"DP-2","virtualX":1920,"virtualY":0,"width":1080,"height":1920}]'
+```
 
 ### Releasing
 

@@ -25,7 +25,6 @@ ColumnLayout {
     property alias cfg_Color: colorButton.color
 
     readonly property string pluginId: "com.github.makrisjr.spannedimage"
-    readonly property var area: Span.virtualArea(Qt.application.screens)
 
     // True when the System Settings Wallpaper page handles "Set for all screens" for us.
     property bool claimedAllScreens: false
@@ -86,76 +85,14 @@ ColumnLayout {
         }
     }
 
-    // Preview: the whole image laid over the monitor layout. Parts that land on a
-    // monitor are shown at full brightness; parts that fall in gaps are dimmed.
-    Item {
-        id: preview
+    LayoutPreview {
         Layout.fillWidth: true
-        Layout.preferredHeight: Math.min(Kirigami.Units.gridUnit * 18, width * root.area.height / root.area.width)
+        Layout.preferredHeight: Math.min(Kirigami.Units.gridUnit * 18, width * area.height / area.width)
         Layout.leftMargin: Kirigami.Units.largeSpacing
         Layout.rightMargin: Kirigami.Units.largeSpacing
-
-        readonly property real scale: Math.min(width / root.area.width, height / root.area.height)
-        readonly property real boxW: root.area.width * scale
-        readonly property real boxH: root.area.height * scale
-
-        Item {
-            id: box
-            width: preview.boxW
-            height: preview.boxH
-            anchors.centerIn: parent
-
-            Rectangle {
-                anchors.fill: parent
-                color: root.cfg_Color
-                opacity: 0.35
-            }
-            Image {
-                anchors.fill: parent
-                source: root.cfg_Image
-                fillMode: root.cfg_FillMode
-                sourceSize: Qt.size(Math.ceil(width * Screen.devicePixelRatio), Math.ceil(height * Screen.devicePixelRatio))
-                asynchronous: true
-                autoTransform: true
-                opacity: 0.25
-            }
-
-            Repeater {
-                model: Qt.application.screens
-                delegate: Item {
-                    required property var modelData
-                    x: (modelData.virtualX - root.area.x) * preview.scale
-                    y: (modelData.virtualY - root.area.y) * preview.scale
-                    width: modelData.width * preview.scale
-                    height: modelData.height * preview.scale
-
-                    SpannedView {
-                        anchors.fill: parent
-                        source: root.cfg_Image
-                        fillMode: root.cfg_FillMode
-                        backgroundColor: root.cfg_Color
-                        area: ({ x: 0, y: 0, width: box.width, height: box.height })
-                        screenPos: Qt.point(parent.x, parent.y)
-                        devicePixelRatio: Screen.devicePixelRatio
-                    }
-                    Rectangle {
-                        anchors.fill: parent
-                        color: "transparent"
-                        border.color: Kirigami.Theme.highlightColor
-                        border.width: 2
-                    }
-                    QQC2.Label {
-                        anchors.left: parent.left
-                        anchors.bottom: parent.bottom
-                        anchors.margins: Kirigami.Units.smallSpacing
-                        text: parent.modelData.name
-                        color: "white"
-                        style: Text.Outline
-                        styleColor: "black"
-                    }
-                }
-            }
-        }
+        source: root.cfg_Image
+        fillMode: root.cfg_FillMode
+        backgroundColor: root.cfg_Color
     }
 
     RowLayout {
