@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "MakrisJr"
+            }
+        ],
+        "BugReportUrl": "https://github.com/MakrisJr/plasma-multi-screen-wallpaper/issues",
+        "Category": "",
+        "Description": "Stretch one image across all of your monitors, cropped to match how they are arranged",
+        "Icon": "preferences-desktop-wallpaper",
+        "Id": "com.github.makrisjr.spannedimage",
+        "License": "GPL-2.0-or-later",
+        "Name": "Spanned Image",
+        "Version": "1.0.0",
+        "Website": "https://github.com/MakrisJr/plasma-multi-screen-wallpaper"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-KDE-ParentApp": "org.kde.plasmashell"
+}
