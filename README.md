@@ -8,15 +8,8 @@ arrangement from Display Configuration, including offset monitors, portrait scre
 monitors of different sizes. Parts of the image that fall in gaps between monitors are
 cropped away.
 
-```
- ┌──────────── combined area ────────────┐
- │                          ┌──────────┐ │
- │ ┌──────────────────────┐ │          │ │
- │ │   monitor 1 slice    │ │ monitor 2│ │
- │ └──────────────────────┘ │  slice   │ │
- │      (cropped away)      └──────────┘ │
- └───────────────────────────────────────┘
-```
+![One wallpaper spanned across two monitors: a landscape monitor on the left and a taller portrait monitor on the right, with the picture continuing across the bezel between them](assets/desktop-preview.png)
+<sub>Wallpaper: Minecraft artwork via [Wallhaven](https://whvn.cc/l31vz2), see [Credits](#credits).</sub>
 
 ## Features
 
@@ -53,6 +46,8 @@ cd plasma-multi-screen-wallpaper
 2. Set **Wallpaper type** to **Spanned Image**.
 3. Click **Browse…** and pick an image.
 4. Click **Apply**.
+
+![System Settings Wallpaper page with Spanned Image selected, showing the image picker, positioning and background options, a preview of each monitor's slice of the image, and the Arrange Monitors button](assets/settings.png)
 
 In System Settings, **Set for all screens** is switched on for you, so every monitor gets
 its slice. In older dialogs without that switch, click **Use on all monitors** instead.
@@ -130,4 +125,8 @@ The third argument is the fill mode: 2 = fill, 1 = fit, 0 = stretch.
 
 ## License
 
-GPL-2.0-or-later. See [LICENSE](LICENSE).
+The plugin code is licensed under [GPL-2.0-or-later](LICENSE).
+
+## Credits
+
+The wallpaper in the screenshots is a piece of Minecraft artwork, [*The Battle of the End has begun*](https://www.reddit.com/r/Minecraft/comments/vfgjo7/the_battle_of_the_end_has_begun_4k/), originally posted on r/Minecraft. Found via [Wallhaven](https://whvn.cc/l31vz2). The image belongs to its original creator, and Minecraft is a trademark of Mojang Studios. The wallpaper is **not** part of this repository's GPL license and is only shown to demonstrate the plugin.
