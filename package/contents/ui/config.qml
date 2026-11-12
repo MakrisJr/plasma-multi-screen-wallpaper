@@ -176,6 +176,9 @@ ColumnLayout {
             visible: !root.claimedAllScreens && !root.isLockScreen
             icon.name: "view-fullscreen"
             text: "Use on all monitors"
+            QQC2.ToolTip.text: "Plasma keeps a separate wallpaper per monitor. This puts this image on all of them."
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             enabled: root.cfg_Image !== ""
             onClicked: {
                 const script = Span.applyAllScript(root.pluginId, root.cfg_Image, root.cfg_FillMode, root.cfg_Color.toString());
@@ -188,19 +191,6 @@ ColumnLayout {
             id: applyStatus
             opacity: 0.7
         }
-    }
-
-    QQC2.Label {
-        Layout.fillWidth: true
-        Layout.leftMargin: Kirigami.Units.largeSpacing
-        Layout.rightMargin: Kirigami.Units.largeSpacing
-        wrapMode: Text.WordWrap
-        opacity: 0.7
-        text: root.isLockScreen
-            ? "The lock screen uses this setting on every monitor, so the image spans all of them."
-            : root.claimedAllScreens
-            ? "\"Set for all screens\" has been switched on so Apply puts this image on every monitor. It goes back to how it was when you pick another wallpaper type."
-            : "Plasma keeps a separate wallpaper per monitor. \"Use on all monitors\" switches every monitor to this image in one go."
     }
 
     P5Support.DataSource {
